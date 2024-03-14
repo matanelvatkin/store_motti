@@ -1,6 +1,7 @@
 import { cache } from 'react'
 import dbConnect from '@/lib/dbConnect'
 import ProductModel, { Product } from '@/lib/models/ProductModel'
+import CategoryModel from '../models/CategoryModel'
 
 export const revalidate = 3600
 
@@ -112,7 +113,7 @@ const getByQuery = cache(
 
 const getCategories = cache(async () => {
   await dbConnect()
-  const categories = await ProductModel.find().distinct('category')
+  const categories = await CategoryModel.find()
   return categories
 })
 
