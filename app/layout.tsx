@@ -6,6 +6,7 @@ import DrawerButton from "@/components/DrawerButton";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/header/Header";
 import InfoNav from "@/components/navs/InfoNav";
+import MainNav from "@/components/navs/MainNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
               <div className="min-h-screen flex flex-col">
               <InfoNav />
                 <Header />
+                <MainNav/>
                 {children}
                 <footer className="footer footer-center p-4 bg-base-300 text-base-content">
                   <p>Copyright © 2024 - All right reserved by Matanel Vatkin</p>
