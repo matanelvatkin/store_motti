@@ -201,7 +201,7 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
                   {...field}
                   isMulti
                   options={productOptions}
-                  className="basic-multi-select"
+                  className="basic-multi-select w-full max-w-md"
                   classNamePrefix="select"
                 />
               )}
