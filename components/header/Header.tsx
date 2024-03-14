@@ -2,10 +2,12 @@ import Link from 'next/link'
 import React from 'react'
 import Menu from './Menu'
 import { SearchBox } from './SearchBox'
+import InfoNav from '../navs/InfoNav'
 
 const Header = () => {
   return (
     <header>
+       
       <nav>
         <div className="navbar justify-between bg-base-300">
           <div>

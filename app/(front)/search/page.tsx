@@ -1,5 +1,6 @@
 import ProductItem from '@/components/products/ProductItem'
 import { Rating } from '@/components/products/Rating'
+import { Category } from '@/lib/models/CategoryModel'
 import productServices from '@/lib/services/productService'
 import Link from 'next/link'
 
@@ -117,15 +118,15 @@ export default async function SearchPage({
                 Any
               </Link>
             </li>
-            {categories.map((c: string) => (
-              <li key={c}>
+            {categories.map((c: Category) => (
+              <li key={c._id}>
                 <Link
                   className={`link link-hover ${
-                    c === category && 'link-primary'
+                    c.name === category && 'link-primary'
                   }`}
-                  href={getFilterUrl({ c })}
+                  href={getFilterUrl({ c:c.name })}
                 >
-                  {c}
+                  {c.name}
                 </Link>
               </li>
             ))}
@@ -222,9 +223,24 @@ export default async function SearchPage({
 
         <div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3  ">
-            {products.map((product) => (
-              <ProductItem key={product.slug} product={product} />
-            ))}
+            {products.filter((product)=>{
+              console.log('as');
+
+              if(category === 'all')
+               return true
+              else{
+                const cat = categories.find((cat)=>cat.name===category)
+                console.log(cat);
+                if(cat){
+                  return cat.products?.includes(product._id)
+                }
+                else return false
+              }
+            }).map((product) => {
+              console.log('map');
+              
+              return <ProductItem key={product.slug} product={product} />
+            })}
           </div>
           <div className="join">
             {products.length > 0 &&
