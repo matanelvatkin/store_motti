@@ -56,6 +56,12 @@ const AdminLayout = async ({
               >
                 Users
               </Link>
+              <Link
+                className={'categories' === activeItem ? 'active' : ''}
+                href="/admin/categories"
+              >
+                categories
+              </Link>
             </li>
           </ul>
         </div>
