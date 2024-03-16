@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Karantina:wght@300;400;700&display=swap')
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -28,4 +29,162 @@ body {
 
 .btn {
   text-transform: none;
+}
+.topnav {
+  color: #3e4a5e;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #ebebeb;
+}
+.topnav ul li {
+  margin-left: 10px;
+  padding: 0 10px;
+  line-height: 45px;
+  font-family: "Assistant", sans-serif;
+}
+.topnav ul li a::after{
+  content: " | ";
+  padding-right: 20px;
+}
+
+.topnav ul li:last-child a::after{
+  content: " ";
+}
+.topnav ul li svg {
+  height: 20px;
+  width: 20px;
+  padding-left: 5px;
+}
+
+.lighting {
+  height: 44px;
+  width: 120px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.lighting a:hover, .lighting .btn:hover {
+  background: none;
+}
+.menu li {
+  width: 200px;
+
+}
+.lighting li {
+  width: 44px;
+height: 44px;
+border: 2px solid #e1e1e1;
+display: inline-block;
+border-radius: 10px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+-ms-border-radius: 10px;
+-o-border-radius: 10px;
+text-align: center;
+line-height: 44px;
+-webkit-transition: all .2s ease;
+transition: all .2s ease;
+padding: 5px;
+}
+
+.lighting li ul li{
+  width: 200px;
+}
+.lighting svg {
+  height: 25px;
+  width: 25px;
+  line-height: 44px;
+}
+.lighting .btn {
+  line-height: 25px;
+  min-height: 25px !important;
+  height: 25px !important;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+.topnav ul li:last-child {
+  margin-left: 0px;
+}
+.topnav ul li a {
+  padding: 3px 0;
+  color: #000;
+  border-bottom: 2px solid transparent;
+  transition: all .25s ease-out;
+  font-family: "Assistant", sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header {
+  padding: 0;
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  top: -9px;
+}
+
+.categorymenu  {
+  background-color: green;
+}
+.categorymenu li span {
+  font-size: 26px;
+  color: #fff;
+  margin: 0;
+  line-height: 45px;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  padding: 0 30px;
+  font-family: "Assistant", sans-serif;
+  font-weight: 900;
+}
+.badge-secondary {
+  position: relative;
+  top: -56px;
+  left: 23px;
+  min-width: 25px;
+  min-height: 25px;
+  background-color: green;
+  border: none;
+}
+.mainmenu {
+  border-width: 1px;
+  border-color: transparent;
+  background-color: #e1e1e1;
+  color: currentColor;
+  --tw-shadow: 0 0 #e1e1e1;
+  --tw-shadow-colored: 0 0 #e1e1e1;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #e1e1e1), var(--tw-ring-shadow, 0 0 #e1e1e1), var(--tw-shadow);
+  outline-color: currentColor;
+}
+.w-500 {
+    width: 500px;
+}
+
+.right{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.left {
+  padding-left: 30px;
+  line-height: 40px;
 }

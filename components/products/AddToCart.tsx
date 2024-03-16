@@ -16,6 +16,9 @@ export default function AddToCart({ item }: { item: OrderItem }) {
   const addToCartHandler = () => {
     increase(item)
   }
+  const buyNowHandler = () => {
+    increase(item)
+  }
   return existItem ? (
     <div>
       <button className="btn" type="button" onClick={() => decrease(existItem)}>
@@ -32,7 +35,15 @@ export default function AddToCart({ item }: { item: OrderItem }) {
       type="button"
       onClick={addToCartHandler}
     >
-      Add to cart
+      הוספה לעגלה
     </button>
-  )
+  
+        // <button
+        //   className="btn w-full"
+        //   type="button"
+        //   onClick={buyNowHandler}
+        // >
+        //   רכישה מהירה
+        // </button>
+  ) 
 }
