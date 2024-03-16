@@ -1,24 +1,33 @@
+import ShippingPage from "@/app/(front)/shipping/page";
 import Link from "next/link";
 import React from "react";
+import { BiEnvelope, BiPhoneCall } from "react-icons/bi";
+import { FaHome, FaShippingFast } from "react-icons/fa";
+import { IoAlbumsOutline } from "react-icons/io5";
+
 
 export default function InfoNav() {
   return (
-    <nav>
-      <ul className="flex flex-row justify-between h-[30px] bg-base-200">
+    <nav className="flex flex-row justify-between h-[40px] topnav">
+      <ul className="flex flex-row justify-between">
         <li>
-          <Link href="/">Home</Link>
+          <Link href="/"><FaHome /> ראשי</Link>
         </li>
         <li>
-          <Link href="/about">About</Link>
+        <Link href="/"><IoAlbumsOutline /> אודות</Link>
         </li>
         <li>
-          <Link href="/products">Products</Link>
+          <Link href="/products"><BiEnvelope /> צרו קשר</Link>
+        </li>
+      </ul>
+      <ul className="flex-row justify-between">
+      </ul>
+      <ul className="flex flex-row justify-between">
+        <li>
+          <Link href="/about"><BiPhoneCall />08-553-4545</Link>
         </li>
         <li>
-          <Link href="/services">Services</Link>
-        </li>
-        <li>
-          <Link href="/contact">Contact</Link>
+          <Link href="/about"><FaShippingFast /> משלוחים ואזורי חלוקה</Link>
         </li>
       </ul>
     </nav>

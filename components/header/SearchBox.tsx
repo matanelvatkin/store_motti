@@ -62,7 +62,7 @@ export const SearchBox = () => {
   };
 
   if (error) return error.message;
-  if (!categories) return "Loading...";
+  if (!categories) return "בטעינה...";
 
   return (
     <>
@@ -70,8 +70,8 @@ export const SearchBox = () => {
         <div className="join">
           <input
             ref={inputRef}
-            className="join-item input input-bordered w-48"
-            placeholder="Search"
+            className="join-item input input-bordered w-500"
+            placeholder="חיפוש מוצרים באתר"
             onChange={(e) => {
               setSearchString(e.target.value);
             }}
@@ -79,9 +79,9 @@ export const SearchBox = () => {
               if (e.key == "Enter") handleSearchFromIcon();
             }}
           />
-          <button className="join-item btn" onClick={handleSearchFromIcon}>
+          {/* <button className="join-item btn" onClick={handleSearchFromIcon}>
             Search
-          </button>
+          </button> */}
         </div>
       </div>
       {searchString.length >= 3 && (
@@ -136,31 +136,10 @@ export const SearchBox = () => {
               </div>
             ))
           ) : (
-            <p>No products found.</p>
+            <p>לא נמצאו מוצרים בחיפוש</p>
           )}
         </div>
       )}
     </>
-  );
-};
-
-const categoriesSelect = ({
-  categories,
-  category,
-}: {
-  categories: [];
-  category: string;
-}) => {
-  return (
-    <select
-      name="category"
-      defaultValue={category}
-      className="join-item select select-bordered "
-    >
-      <option value="all">All</option>
-      {categories.map((c: string) => (
-        <option key={c}>{c}</option>
-      ))}
-    </select>
   );
 };

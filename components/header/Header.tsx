@@ -2,16 +2,14 @@ import Link from 'next/link'
 import React from 'react'
 import Menu from './Menu'
 import { SearchBox } from './SearchBox'
-import InfoNav from '../navs/InfoNav'
 
 const Header = () => {
   return (
     <header>
-       
       <nav>
-        <div className="navbar justify-between bg-base-300">
+        <div className="navbar justify-between  h-[90px] headermain">
           <div>
-            <label htmlFor="my-drawer" className="btn btn-square btn-ghost">
+            <label htmlFor="my-drawer" className="btn mainmenu btn-square btn-ghost">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -26,15 +24,25 @@ const Header = () => {
                 ></path>
               </svg>
             </label>
-            <Link href="/" className="btn btn-ghost text-lg">
-              Next Amazona V2
-            </Link>
           </div>
-
+          <div>
+          <SearchBox />
+          </div>
+          <div>
+          <Link href="/" className="text-lg">
+          <img
+          className='logo'
+        src="../../images/logo.webp"
+        width="170"
+        height="170"
+      />
+      </Link>
+          </div>
+          <div>
+          </div>
+          <div>
           <Menu />
         </div>
-        <div className="bg-base-300 block md:hidden text-center pb-3">
-          <SearchBox />
         </div>
       </nav>
     </header>
