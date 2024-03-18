@@ -28,6 +28,7 @@ export default function MainNav() {
           key={category._id}
             className="relative"
             onMouseEnter={() => handleMouseEnter(category.name)}
+
             onMouseLeave={handleMouseLeave}
           >
             <span>{category.name}</span>
@@ -56,6 +57,12 @@ export default function MainNav() {
           </li>
         ))}
         </div>
+        <div className="left">
+        <li>
+          <p>זמן הספקה תוך 24 שעות</p>
+        </li>
+        </div>
+
         <div className="left">
         <li>
           <p>זמן הספקה תוך 24 שעות</p>
