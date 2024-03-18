@@ -1,6 +1,7 @@
 import { auth } from '@/lib/auth'
 import dbConnect from '@/lib/dbConnect'
 import ProductModel from '@/lib/models/ProductModel'
+import mongoose from 'mongoose'
 
 export const GET = auth(async (...args: any) => {
   const [req, { params }] = args
@@ -13,7 +14,8 @@ export const GET = auth(async (...args: any) => {
     )
   }
   await dbConnect()
-  const product = await ProductModel.findById(params.id)
+  const product = await ProductModel.findById(params.id).populate('category')
+  
   if (!product) {
     return Response.json(
       { message: 'product not found' },
@@ -26,6 +28,7 @@ export const GET = auth(async (...args: any) => {
 }) as any
 
 export const PUT = auth(async (...args: any) => {
+  
   const [req, { params }] = args
   if (!req.auth || !req.auth.user?.isAdmin) {
     return Response.json(
@@ -50,7 +53,8 @@ export const PUT = auth(async (...args: any) => {
   try {
     await dbConnect()
 
-    const product = await ProductModel.findById(params.id)
+    const product = await ProductModel.findById(params.id).populate('category')
+    
     if (product) {
       product.name = name
       product.slug = slug

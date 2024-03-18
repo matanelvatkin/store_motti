@@ -7,11 +7,9 @@ const categorySchema = new mongoose.Schema(
     image: { type: String},
     icon: { type: String},
     iconSvg: { type: String},
+    slug: { type: String},
+    code: { type: String},
     description: { type: String, required: true },
-    products:[ {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-      },]
   },
   {
     timestamps: true,
@@ -30,5 +28,6 @@ export type Category = {
   icon?:  string,
   iconSvg?:  string,
   description:  string,
-  products:Array<Product|mongoose.Schema.Types.ObjectId>
+  code?:string,
+  slug?:string
 }

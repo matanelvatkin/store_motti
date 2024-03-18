@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
+import { Category } from './CategoryModel'
 
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
-    category: { type: String, required: true },
+    category: [{ type: mongoose.Types.ObjectId, ref: 'Category'}],
     image: { type: String, required: true },
     price: { type: Number, required: true },
     brand: { type: String, required: true },
@@ -34,7 +35,7 @@ export type Product = {
   price: number
   brand: string
   description: string
-  category: string
+  category?: any[]
   rating?: number
   numReviews: number
   countInStock: number
