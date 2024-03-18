@@ -19,7 +19,8 @@ const getFeatured = cache(async () => {
 
 const getBySlug = cache(async (slug: string) => {
   await dbConnect()
-  const product = await ProductModel.findOne({ slug }).lean()
+  
+  const product = await ProductModel.findOne({ slug:decodeURIComponent(slug) }).lean()
   return product as Product
 })
 
