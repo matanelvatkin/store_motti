@@ -6,10 +6,8 @@ import Link from 'next/link'
 import { useForm, Controller } from 'react-hook-form'
 import { useEffect } from 'react'
 import { Category } from '@/lib/models/CategoryModel'
-import { Product } from '@/lib/models/ProductModel'
 import { formatId } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
-import Select from 'react-select'
 
 export default function CategoryEditForm({ categoryId }: { categoryId: string }) {
   const { data: category, error } = useSWR(`/api/admin/categories/${categoryId}`)
@@ -38,7 +36,6 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
     handleSubmit,
     formState: { errors },
     setValue,
-    control,
   } = useForm<Category>()
 
   useEffect(() => {
@@ -48,7 +45,8 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
     setValue('icon', category.icon)
     setValue('iconSvg', category.iconSvg)
     setValue('description', category.description)
-    setValue('products', category.products)
+    setValue('slug', category.slug||'')
+    setValue('code', category.code||'')
   }, [category, setValue])
 
   const formSubmit = async (formData: any) => {
@@ -90,10 +88,7 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
     }
   }
 
-  const productOptions = products.map((product: Product) => ({
-    value: product._id,
-    label: product.name,
-  }))
+ 
 
   return (
     <div>
@@ -112,6 +107,38 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
             />
             {errors.name && (
               <div className="text-error">{errors.name.message}</div>
+            )}
+          </div>
+        </div>
+        <div className="md:flex mb-6">
+          <label className="label md:w-1/5" htmlFor="name">
+            slug
+          </label>
+          <div className="md:w-4/5">
+            <input
+              type="text"
+              id="slug"
+              {...register('slug', { required: 'slug is required' })}
+              className="input input-bordered w-full max-w-md"
+            />
+            {errors.slug && (
+              <div className="text-error">{errors.slug.message}</div>
+            )}
+          </div>
+        </div>
+        <div className="md:flex mb-6">
+          <label className="label md:w-1/5" htmlFor="name">
+            code
+          </label>
+          <div className="md:w-4/5">
+            <input
+              type="text"
+              id="code"
+              {...register('code', { required: 'code is required' })}
+              className="input input-bordered w-full max-w-md"
+            />
+            {errors.code && (
+              <div className="text-error">{errors.code.message}</div>
             )}
           </div>
         </div>
@@ -188,26 +215,7 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
           </div>
         </div>
 
-        <div className="md:flex mb-6">
-          <label className="label md:w-1/5" htmlFor="products">
-            Products
-          </label>
-          <div className="md:w-4/5">
-            <Controller
-              name="products"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  isMulti
-                  options={productOptions}
-                  className="basic-multi-select w-full max-w-md"
-                  classNamePrefix="select"
-                />
-              )}
-            />
-          </div>
-        </div>
+        
 
         <button type="submit" disabled={isUpdating} className="btn btn-primary">
           {isUpdating && <span className="loading loading-spinner"></span>}

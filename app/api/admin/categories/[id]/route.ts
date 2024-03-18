@@ -36,7 +36,7 @@ export const PUT = auth(async (...args: any) => {
     )
   }
 
-  const { name, image, icon, iconSvg, description } = await req.json()
+  const { name, image, icon, iconSvg, description,slug,code } = await req.json()
 
   try {
     await dbConnect()
@@ -48,6 +48,10 @@ export const PUT = auth(async (...args: any) => {
       category.icon = icon
       category.iconSvg = iconSvg
       category.description = description
+      category.slug = slug
+      category.code = code
+
+      
 
       const updatedCategory = await category.save()
       return Response.json(updatedCategory)
