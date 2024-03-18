@@ -74,7 +74,6 @@ export default function Products() {
               <th>id</th>
               <th>name</th>
               <th>price</th>
-              <th>category</th>
               <th>count in stock</th>
               <th>rating</th>
               <th>actions</th>
@@ -86,7 +85,6 @@ export default function Products() {
                 <td>{formatId(product._id!)}</td>
                 <td>{product.name}</td>
                 <td>${product.price}</td>
-                <td>{product.category}</td>
                 <td>{product.countInStock}</td>
                 <td>{product.rating}</td>
                 <td>

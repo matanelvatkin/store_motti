@@ -32,9 +32,12 @@ export const POST = auth(async (req: any) => {
     icon: 'sample icon',
     iconSvg: 'sample icon svg',
     description: 'sample description',
+    slug:'sample slug',
+    code:'sample code',
   })
   try {
     await category.save()
+ 
     return Response.json(
       { message: 'Category created successfully', category },
       {
