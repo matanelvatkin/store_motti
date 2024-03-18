@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_APP_NAME || 'Next Amazona V2',
+  title: process.env.NEXT_PUBLIC_APP_NAME || 'חנות לדוגמה',
   description:
     process.env.NEXT_PUBLIC_APP_DESC ||
     'Nextjs, Server components, Next auth, daisyui, zustand',
@@ -53,7 +53,7 @@ export default async function Home() {
           </div>
         ))}
       </div>
-      <h2 className="text-2xl py-2">Latest Products</h2>
+      <h2 className="text-2xl py-2">מוצרים חדשים</h2>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {latestProducts.map((product) => (
           <ProductItem key={product.slug} product={convertDocToObj(product)} />

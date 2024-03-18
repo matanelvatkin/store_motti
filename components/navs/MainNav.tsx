@@ -1,8 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { FaRegGrinSquintTears } from "react-icons/fa";
-import { GiFruitBowl, GiFruiting } from "react-icons/gi";
 
 export default function MainNav() {
   const [openDropdown, setOpenDropdown] = useState('')

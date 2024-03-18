@@ -32,10 +32,10 @@ body {
 }
 .topnav {
   color: #3e4a5e;
-    font-size: 14px;
-    height: 45px;
-    line-height: 45px;
-    border-bottom: 1px solid #ebebeb;
+  font-size: 14px;
+  height: 45px;
+  line-height: 45px;
+  box-shadow: 2px 2px #cccccc69;
 }
 .topnav ul li {
   margin-left: 10px;
@@ -187,4 +187,8 @@ header {
 .left {
   padding-left: 30px;
   line-height: 40px;
+}
+
+.drawer-side {
+  z-index: 2;
 }

@@ -5,10 +5,8 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { SearchBox } from './SearchBox'
 import { BsCart } from 'react-icons/bs'
 import { BiLogOut, BiUser } from 'react-icons/bi'
-import { LuLogOut } from 'react-icons/lu'
 
 const Menu = () => {
   const { items, init } = useCartService()

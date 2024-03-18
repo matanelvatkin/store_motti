@@ -32,7 +32,7 @@ const Header = () => {
           <Link href="/" className="text-lg">
           <img
           className='logo'
-        src="../../images/logo.webp"
+        src="../../images/logo.png"
         width="170"
         height="170"
       />
