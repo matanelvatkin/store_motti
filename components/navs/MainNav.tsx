@@ -3,6 +3,8 @@ import { Category } from "@/lib/models/CategoryModel";
 import { Product } from "@/lib/models/ProductModel";
 import Link from "next/link";
 import { useState } from "react";
+import { FaRegGrinSquintTears } from "react-icons/fa";
+import { GiFruitBowl, GiFruiting } from "react-icons/gi";
 import useSWR from "swr";
 
 export default function MainNav() {
@@ -18,8 +20,9 @@ export default function MainNav() {
   };
 
   return (
-    <nav className="bg-gray-400">
-      <ul className="flex flex-row justify-between">
+    <nav  className="h-[90px]" >
+      <ul className="categorymenu flex flex-row justify-between">
+      <div className="right  flex flex-row justify-between">
         {catagories?.map((category: Category) => (
           <li
           key={category._id}
@@ -52,6 +55,12 @@ export default function MainNav() {
             )}
           </li>
         ))}
+        </div>
+        <div className="left">
+        <li>
+          <p>זמן הספקה תוך 24 שעות</p>
+        </li>
+        </div>
       </ul>
     </nav>
   );
