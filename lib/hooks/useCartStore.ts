@@ -85,7 +85,9 @@ export default function useCartService() {
         toast('the product has been removed from the cart')
       }
       else{
-        updatedCartItems = items.map((x) => (item.slug ? { ...exist, qty: exist.qty - 1 } : x))
+        updatedCartItems = items.map((x) => {
+          return x.slug === item.slug ? { ...exist, qty: exist.qty - 1 } : x
+        })
       }
       const { itemsPrice, shippingPrice, taxPrice, totalPrice } =
         calcPrice(updatedCartItems)
@@ -96,7 +98,7 @@ export default function useCartService() {
         taxPrice,
         totalPrice,
       })
-    },
+    },    
     saveShippingAddrress: (shippingAddress: ShippingAddress) => {
       cartStore.setState({
         shippingAddress,

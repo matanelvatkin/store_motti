@@ -1,25 +1,23 @@
-'use client'
-
-import useLayoutService from '@/lib/hooks/useLayout'
-import Link from 'next/link'
-import useSWR from 'swr'
+"use client";
+import useCartService from "@/lib/hooks/useCartStore";
+import AddToCart from "./products/AddToCart";
+import { Product } from "@/lib/models/ProductModel";
 
 const Sidebar = () => {
-  const { toggleDrawer } = useLayoutService()
-  const { data: categories, error } = useSWR('/api/products/categories')
-
-  if (error) return error.message
-  if (!categories) return 'Loading...'
+  const cart = useCartService();
 
   return (
-    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-      <li>
-        <h2 className="text-xl">עגלת קניות</h2>
-      </li>
+    <>
+      <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+      <h2 className="text-xl">עגלת קניות</h2>
+        {cart?.items?.map((item)=><li key={item.name}>
+          {item.name}
+          {item.price*item.qty}
+          <AddToCart item={item}/>
+        </li>)}
+      </ul>
+    </>
+  );
+};
 
-
-    </ul>
-  )
-}
-
-export default Sidebar
+export default Sidebar;
