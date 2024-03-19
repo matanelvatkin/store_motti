@@ -26,17 +26,17 @@ const Header = () => {
             </label>
           </div>
           <div>
-          <SearchBox />
-          </div>
-          <div>
           <Link href="/" className="text-lg">
           <img
           className='logo'
-        src="../../images/logo.webp"
+        src="../../images/logo.png"
         width="170"
         height="170"
       />
       </Link>
+          </div>
+          <div>
+          <SearchBox />
           </div>
           <div>
           </div>

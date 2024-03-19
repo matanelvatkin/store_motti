@@ -1,7 +1,16 @@
+@font-face {
+  font-family: "Almoni";
+  src: url("https://db.onlinewebfonts.com/t/379f355d2cc596f2c28da7b457ce25f6.eot");
+  src: url("https://db.onlinewebfonts.com/t/379f355d2cc596f2c28da7b457ce25f6.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/379f355d2cc596f2c28da7b457ce25f6.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/379f355d2cc596f2c28da7b457ce25f6.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/379f355d2cc596f2c28da7b457ce25f6.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/379f355d2cc596f2c28da7b457ce25f6.svg#Almoni ML v5 AAA Light")format("svg");
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Karantina:wght@300;400;700&display=swap')
+
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -25,23 +34,26 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    font-family: Almoni;
+    font-weight: normal;
 }
-
+no
 .btn {
   text-transform: none;
 }
 .topnav {
   color: #3e4a5e;
-    font-size: 14px;
-    height: 45px;
-    line-height: 45px;
-    border-bottom: 1px solid #ebebeb;
+  font-size: 14px;
+  height: 45px;
+  line-height: 45px;
+  box-shadow: 2px 2px #cccccc69;
 }
 .topnav ul li {
   margin-left: 10px;
   padding: 0 10px;
   line-height: 45px;
-  font-family: "Assistant", sans-serif;
+  font-family: Almoni;
+  font-weight: 600;
 }
 .topnav ul li a::after{
   content: " | ";
@@ -115,8 +127,8 @@ padding: 5px;
   color: #000;
   border-bottom: 2px solid transparent;
   transition: all .25s ease-out;
-  font-family: "Assistant", sans-serif;
-  font-weight: 400;
+  font-family: Almoni;
+  font-weight: 600;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -132,10 +144,9 @@ header {
 }
 
 .logo {
-  max-width: 100%;
-  height: auto;
   position: relative;
-  top: -9px;
+  top: 0px;
+  width: 227px;
 }
 
 .categorymenu  {
@@ -150,8 +161,8 @@ header {
   cursor: pointer;
   position: relative;
   padding: 0 30px;
-  font-family: "Assistant", sans-serif;
-  font-weight: 900;
+  font-family: Almoni;
+  font-weight: 600;
 }
 .badge-secondary {
   position: relative;
@@ -188,3 +199,48 @@ header {
   padding-left: 30px;
   line-height: 40px;
 }
+
+.left  li p{
+  color: #fff;
+}
+
+.drawer-side {
+  z-index: 2;
+}
+
+.mainmenu, .lighting li  {
+  background-color: #008000;
+  color: #fff;
+  border: none;
+}
+
+.mainmenu:hover, .lighting li:hover, .lighting li:active, .lighting li a:active {
+  background-color: #008000c8;
+  color: #fff;
+  border: none;
+}
+
+.menu li > *:not(ul, .menu-title, details, .btn):active, .menu li > *:not(ul, .menu-title, details, .btn).active, .menu li > details > summary:active {
+  background-color: #008000c8;
+  color: #fff;
+  border: none;
+}
+.mainmenu svg {
+  height: 38px;
+  width: 38px;
+}
+
+.dropdown ul {
+  background-color: #008000;
+}
+.dropdown ul li, .dropdown ul li:hover  {
+  width: 200px;
+  padding: 0 20px 0 0px;
+  line-height: 44px;
+}
+.dropdown ul li a {
+  padding: 0;
+  margin: 0;
+}
+
+
