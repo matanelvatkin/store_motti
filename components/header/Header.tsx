@@ -26,9 +26,6 @@ const Header = () => {
             </label>
           </div>
           <div>
-          <SearchBox />
-          </div>
-          <div>
           <Link href="/" className="text-lg">
           <img
           className='logo'
@@ -37,6 +34,9 @@ const Header = () => {
         height="170"
       />
       </Link>
+          </div>
+          <div>
+          <SearchBox />
           </div>
           <div>
           </div>
