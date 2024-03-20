@@ -1,32 +1,32 @@
-'use client'
-import useCartService from '@/lib/hooks/useCartStore'
-import useLayoutService from '@/lib/hooks/useLayout'
-import { signIn, signOut, useSession } from 'next-auth/react'
-
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { BsCart } from 'react-icons/bs'
-import { BiLogOut, BiUser } from 'react-icons/bi'
+"use client";
+import useCartService from "@/lib/hooks/useCartStore";
+import useLayoutService from "@/lib/hooks/useLayout";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Form from '../../app/(front)/signin/Form'
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { BsCart } from "react-icons/bs";
+import { BiLogOut, BiUser } from "react-icons/bi";
 
 const Menu = () => {
-  const { items, init } = useCartService()
-  const [mounted, setMounted] = useState(false)
+  const { items, init } = useCartService();
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   const signoutHandler = () => {
-    signOut({ callbackUrl: '/signin' })
-    init()
-  }
+    signOut({ callbackUrl: "/signin" });
+    init();
+  };
 
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
-  const { theme, toggleTheme } = useLayoutService()
+  const { theme, toggleTheme, openPopup } = useLayoutService();
 
   const handleClick = () => {
-    ;(document.activeElement as HTMLElement).blur()
-  }
+    (document.activeElement as HTMLElement).blur();
+  };
 
   return (
     <>
@@ -37,7 +37,7 @@ const Menu = () => {
               <BsCart />
               {mounted && items.length != 0 && (
                 <div className="badge badge-secondary">
-                  {items.reduce((a, c) => a + c.qty, 0)}{' '}
+                  {items.reduce((a, c) => a + c.qty, 0)}{" "}
                 </div>
               )}
             </Link>
@@ -66,9 +66,7 @@ const Menu = () => {
                       <Link href="/profile">החשבון שלי</Link>
                     </li>
                     <li onClick={handleClick}>
-                      <a onClick={signoutHandler}>
-                        יציאה
-                      </a>
+                      <a onClick={signoutHandler}>יציאה</a>
                     </li>
                   </ul>
                 </div>
@@ -79,7 +77,9 @@ const Menu = () => {
               <button
                 className="btn btn-ghost rounded-btn"
                 type="button"
-                onClick={() => signIn()}
+                onClick={() => {
+                  openPopup(<Form/> );
+                }}
               >
                 <BiUser />
               </button>
@@ -88,7 +88,7 @@ const Menu = () => {
         </ul>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

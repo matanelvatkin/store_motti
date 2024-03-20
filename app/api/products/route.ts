@@ -1,9 +1,9 @@
 import dbConnect from '@/lib/dbConnect'
-import CategoryModel from '@/lib/models/CategoryModel'
+import ProductModel from '@/lib/models/ProductModel'
 
 export const GET = async (req: any) => {
   await dbConnect()
-  const categories = await CategoryModel.find()
+  const categories = await ProductModel.find()
   
   return Response.json(categories)
 }
