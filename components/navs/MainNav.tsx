@@ -7,8 +7,8 @@ import useSWR from "swr";
 
 export default function MainNav() {
   const [openDropdown, setOpenDropdown] = useState("");
-  const { data: catagories } = useSWR(`/api/admin/categories`);
-  const { data: products } = useSWR(`/api/admin/products`);
+  const { data: catagories } = useSWR(`/api/products/categories`);
+  const { data: products } = useSWR(`/api/products`);
   const handleMouseEnter = (dropdown: string) => {
     setOpenDropdown(dropdown);
   };
@@ -16,7 +16,7 @@ export default function MainNav() {
   const handleMouseLeave = () => {
     setOpenDropdown("");
   };
-
+  
   return (
     <nav  className="h-[90px]" >
       <ul className="categorymenu flex flex-row justify-between">

@@ -3,7 +3,7 @@ import CategoryModel from '@/lib/models/CategoryModel'
 
 export const GET = async (req: any) => {
   await dbConnect()
-  const categories = await CategoryModel.find().distinct('name')
+  const categories = await CategoryModel.find()
   
   return Response.json(categories)
 }

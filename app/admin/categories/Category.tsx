@@ -8,6 +8,7 @@ import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 
 export default function Categories() {
+  
   const { data: categories, error } = useSWR(`/api/admin/categories`)
 
   const router = useRouter()

@@ -4,12 +4,13 @@ import useSWR from 'swr'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { useForm, Controller } from 'react-hook-form'
-import { useEffect } from 'react'
+import { useEffect, } from 'react'
 import { Category } from '@/lib/models/CategoryModel'
 import { formatId } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 
 export default function CategoryEditForm({ categoryId }: { categoryId: string }) {
+ 
   const { data: category, error } = useSWR(`/api/admin/categories/${categoryId}`)
   const { data: products } = useSWR(`/api/admin/products`)
   const router = useRouter()
