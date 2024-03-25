@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { Product } from './ProductModel'
 
 const categorySchema = new mongoose.Schema(
   {
@@ -10,6 +9,7 @@ const categorySchema = new mongoose.Schema(
     slug: { type: String},
     code: { type: String},
     description: { type: String, required: true },
+    inMainNav:{type:Boolean, default: false}
   },
   {
     timestamps: true,
@@ -29,5 +29,6 @@ export type Category = {
   iconSvg?:  string,
   description:  string,
   code?:string,
-  slug?:string
+  slug?:string,
+  inMainNav?:boolean
 }

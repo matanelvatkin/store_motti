@@ -7,10 +7,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BsCart } from "react-icons/bs";
 import { BiLogOut, BiUser } from "react-icons/bi";
+import { useSearchParams } from "next/navigation";
 
 const Menu = () => {
   const { items, init } = useCartService();
   const [mounted, setMounted] = useState(false);
+  const params = useSearchParams()
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -22,11 +24,17 @@ const Menu = () => {
 
   const { data: session } = useSession();
 
-  const { theme, toggleTheme, openPopup } = useLayoutService();
+  const { theme, toggleTheme, openPopup,closePopup } = useLayoutService();
 
   const handleClick = () => {
     (document.activeElement as HTMLElement).blur();
   };
+  useEffect(()=>{
+    if(params.get('error') === 'CredentialsSignin'){
+      openPopup(<Form/>)
+    }
+    else closePopup()
+  },[params])
 
   return (
     <>

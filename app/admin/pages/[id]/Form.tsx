@@ -5,17 +5,17 @@ import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { useForm, Controller } from 'react-hook-form'
 import { useEffect, } from 'react'
-import { Category } from '@/lib/models/CategoryModel'
+import { Page } from '@/lib/models/PageModel'
 import { formatId } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 
-export default function CategoryEditForm({ categoryId }: { categoryId: string }) {
+export default function PagesEditForm({ pageId }: { pageId: string }) {
  
-  const { data: category, error } = useSWR(`/api/admin/categories/${categoryId}`)
+  const { data: page, error } = useSWR(`/api/admin/pages/${pageId}`)
 
   const router = useRouter()
-  const { trigger: updateCategory, isMutating: isUpdating } = useSWRMutation(
-    `/api/admin/categories/${categoryId}`,
+  const { trigger: updatePage, isMutating: isUpdating } = useSWRMutation(
+    `/api/admin/pages/${pageId}`,
     async (url, { arg }) => {
       const res = await fetch(`${url}`, {
         method: 'PUT',
@@ -27,9 +27,9 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
       const data = await res.json()
       if (!res.ok) return toast.error(data.message)
 
-      toast.success('Category updated successfully')
-      router.push('/admin/categories')
-      mutate('/api/products/categories');
+      toast.success('Page updated successfully')
+      router.push('/admin/pages')
+      mutate('/api/products/pages');
     }
   )
 
@@ -38,26 +38,22 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<Category>()
+  } = useForm<Page>()
 
   useEffect(() => {
-    if (!category) return
-    setValue('name', category.name)
-    setValue('image', category.image)
-    setValue('icon', category.icon)
-    setValue('iconSvg', category.iconSvg)
-    setValue('description', category.description)
-    setValue('slug', category.slug||'')
-    setValue('code', category.code||'')
-    setValue('inMainNav', category.inMainNav)
-  }, [category, setValue])
+    if (!page) return
+    setValue('image', page.image)
+    setValue('description', page.description)
+    setValue('slug', page.slug||'')
+    setValue('title', page.title)
+  }, [page, setValue])
 
   const formSubmit = async (formData: any) => {
-    await updateCategory(formData)
+    await updatePage(formData)
   }
 
   if (error) return error.message
-  if (!category) return 'Loading...'
+  if (!page) return 'Loading...'
 
   const uploadHandler = async (e: any) => {
     const toastId = toast.loading('Uploading image...')
@@ -95,26 +91,26 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
 
   return (
     <div>
-      <h1 className="text-2xl py-4">Edit Category {formatId(categoryId)}</h1>
+      <h1 className="text-2xl py-4">Edit Page {formatId(pageId)}</h1>
       <form onSubmit={handleSubmit(formSubmit)}>
         <div className="md:flex mb-6">
-          <label className="label md:w-1/5" htmlFor="name">
+          <label className="label md:w-1/5" htmlFor="title">
             Name
           </label>
           <div className="md:w-4/5">
             <input
               type="text"
-              id="name"
-              {...register('name', { required: 'Name is required' })}
+              id="title"
+              {...register('title', { required: 'Title is required' })}
               className="input input-bordered w-full max-w-md"
             />
-            {errors.name && (
-              <div className="text-error">{errors.name.message}</div>
+            {errors.title && (
+              <div className="text-error">{errors.title.message}</div>
             )}
           </div>
         </div>
         <div className="md:flex mb-6">
-          <label className="label md:w-1/5" htmlFor="name">
+          <label className="label md:w-1/5" htmlFor="slug">
             slug
           </label>
           <div className="md:w-4/5">
@@ -129,40 +125,7 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
             )}
           </div>
         </div>
-        <div className="md:flex mb-6">
-          <label className="label md:w-1/5" htmlFor="name">
-            code
-          </label>
-          <div className="md:w-4/5">
-            <input
-              type="text"
-              id="code"
-              {...register('code', { required: 'code is required' })}
-              className="input input-bordered w-full max-w-md"
-            />
-            {errors.code && (
-              <div className="text-error">{errors.code.message}</div>
-            )}
-          </div>
-        </div>
-        <div className="md:flex mb-6">
-          <label className="label md:w-1/5" htmlFor="name">
-            inMainNav
-          </label>
-          <div className="md:w-4/5">
-            <input
-              type="checkbox"
-              id="inMainNav"
-              {...register('inMainNav')}
-              className="checkbox max-w-md"
-              defaultChecked={category.inMainNav}
-            />
-            {errors.inMainNav && (
-              <div className="text-error">{errors.inMainNav.message}</div>
-            )}
-          </div>
-        </div>
-
+       
         <div className="md:flex mb-6">
           <label className="label md:w-1/5" htmlFor="image">
             Image
@@ -190,34 +153,6 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
             />
           </div>
         </div>
-
-        <div className="md:flex mb-6">
-          <label className="label md:w-1/5" htmlFor="icon">
-            Icon
-          </label>
-          <div className="md:w-4/5">
-            <input
-              type="text"
-              id="icon"
-              {...register('icon')}
-              className="input input-bordered w-full max-w-md"
-            />
-          </div>
-        </div>
-
-        <div className="md:flex mb-6">
-          <label className="label md:w-1/5" htmlFor="iconSvg">
-            Icon SVG
-          </label>
-          <div className="md:w-4/5">
-            <input
-              type="text"
-              id="iconSvg"
-              {...register('iconSvg')}
-              className="input input-bordered w-full max-w-md"
-            />
-          </div>
-        </div>        
         <div className="md:flex mb-6">
           <label className="label md:w-1/5" htmlFor="description">
             Description
@@ -233,14 +168,11 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
             )}
           </div>
         </div>
-
-        
-
         <button type="submit" disabled={isUpdating} className="btn btn-primary">
           {isUpdating && <span className="loading loading-spinner"></span>}
           Update
         </button>
-        <Link className="btn ml-4" href="/admin/categories">
+        <Link className="btn ml-4" href="/admin/pages">
           Cancel
         </Link>
       </form>

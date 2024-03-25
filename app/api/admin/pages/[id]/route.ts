@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth'
 import dbConnect from '@/lib/dbConnect'
-import CategoryModel from '@/lib/models/CategoryModel'
+import PageModel from '@/lib/models/PageModel'
 
 export const GET = auth(async (...args: any) => {
   const [req, { params }] = args
@@ -13,16 +13,16 @@ export const GET = auth(async (...args: any) => {
     )
   }
   await dbConnect()
-  const category = await CategoryModel.findById(params.id)
-  if (!category) {
+  const page = await PageModel.findById(params.id)
+  if (!page) {
     return Response.json(
-      { message: 'category not found' },
+      { message: 'page not found' },
       {
         status: 404,
       }
     )
   }
-  return Response.json(category)
+  return Response.json(page)
 }) as any
 
 export const PUT = auth(async (...args: any) => {
@@ -36,29 +36,23 @@ export const PUT = auth(async (...args: any) => {
     )
   }
 
-  const { name, image, icon, iconSvg, description,slug,code,inMainNav } = await req.json()
+  const { title, image, description,slug } = await req.json()
 
   try {
     await dbConnect()
 
-    const category = await CategoryModel.findById(params.id)
-    if (category) {
-      category.name = name
-      category.image = image
-      category.icon = icon
-      category.iconSvg = iconSvg
-      category.description = description
-      category.slug = slug
-      category.code = code
-      category.inMainNav = inMainNav
-
+    const page = await PageModel.findById(params.id)
+    if (page) {
+      page.title = title
+      page.image = image
+      page.description = description
+      page.slug = slug
       
-
-      const updatedCategory = await category.save()
-      return Response.json(updatedCategory)
+      const updatedPage = await page.save()
+      return Response.json(updatedPage)
     } else {
       return Response.json(
-        { message: 'Category not found' },
+        { message: 'Page not found' },
         {
           status: 404,
         }
@@ -88,13 +82,13 @@ export const DELETE = auth(async (...args: any) => {
 
   try {
     await dbConnect()
-    const category = await CategoryModel.findById(params.id)
-    if (category) {
-      await category.deleteOne()
-      return Response.json({ message: 'Category deleted successfully' })
+    const page = await PageModel.findById(params.id)
+    if (page) {
+      await page.deleteOne()
+      return Response.json({ message: 'Page deleted successfully' })
     } else {
       return Response.json(
-        { message: 'Category not found' },
+        { message: 'Page not found' },
         {
           status: 404,
         }

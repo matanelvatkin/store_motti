@@ -2,13 +2,16 @@
 import { Category } from "@/lib/models/CategoryModel";
 import { Product } from "@/lib/models/ProductModel";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import useSWR from "swr";
+
 
 export default function MainNav() {
   const [openDropdown, setOpenDropdown] = useState("");
   const { data: catagories } = useSWR(`/api/products/categories`);
   const { data: products } = useSWR(`/api/products`);
+  const router = useRouter()
   const handleMouseEnter = (dropdown: string) => {
     setOpenDropdown(dropdown);
   };
@@ -21,15 +24,14 @@ export default function MainNav() {
     <nav  className="h-[90px]" >
       <ul className="categorymenu flex flex-row justify-between">
       <div className="right  flex flex-row justify-between">
-        {catagories?.map((category: Category) => (
+        {catagories?.filter((category: Category)=>category.inMainNav)?.map((category: Category) => (
           <li
           key={category._id}
             className="relative"
             onMouseEnter={() => handleMouseEnter(category.name)}
-
             onMouseLeave={handleMouseLeave}
           >
-            <span>{category.name}</span>
+            <span  onClick={()=>router.push(`/category/${category.name }`)}>{category.name}</span>
             {openDropdown === category.name && (
               <div
                 onMouseEnter={() => handleMouseEnter(category.name)}

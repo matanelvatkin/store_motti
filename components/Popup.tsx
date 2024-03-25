@@ -9,10 +9,11 @@ export default function Popup() {
       closePopup();
     }
   };
-  
   return (
     <>
-      {popup? (
+      {!popup.type? (
+        <div></div>
+      ):(
         <div className="w-[100vw] h-[100vh] absolute z-10 bg-gray-400 bg-opacity-20 flex justify-center items-center" 
         onClick={handleBackgroundClick}
         >
@@ -21,8 +22,6 @@ export default function Popup() {
             {popup}
           </div>
         </div>
-      ) : (
-        <div></div>
       )}
     </>
   );
