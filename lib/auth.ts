@@ -33,9 +33,9 @@ export const config = {
     }),
   ],
   pages: {
-    signIn: '/signin',
-    newUser: '/register',
-    error: '/signin',
+    signIn: '/',
+    newUser: '/',
+    error: '/',
   },
   callbacks: {
     async jwt({ user, trigger, session, token }: any) {

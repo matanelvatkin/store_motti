@@ -1,6 +1,6 @@
 'use client'
 import useSWRMutation from 'swr/mutation'
-import useSWR from 'swr'
+import useSWR,{mutate} from 'swr'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { useForm, Controller } from 'react-hook-form'
@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation'
 export default function CategoryEditForm({ categoryId }: { categoryId: string }) {
  
   const { data: category, error } = useSWR(`/api/admin/categories/${categoryId}`)
-  const { data: products } = useSWR(`/api/admin/products`)
+
   const router = useRouter()
   const { trigger: updateCategory, isMutating: isUpdating } = useSWRMutation(
     `/api/admin/categories/${categoryId}`,
@@ -29,6 +29,7 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
 
       toast.success('Category updated successfully')
       router.push('/admin/categories')
+      mutate('/api/products/categories');
     }
   )
 
@@ -48,6 +49,7 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
     setValue('description', category.description)
     setValue('slug', category.slug||'')
     setValue('code', category.code||'')
+    setValue('inMainNav', category.inMainNav)
   }, [category, setValue])
 
   const formSubmit = async (formData: any) => {
@@ -55,7 +57,7 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
   }
 
   if (error) return error.message
-  if (!category || !products) return 'Loading...'
+  if (!category) return 'Loading...'
 
   const uploadHandler = async (e: any) => {
     const toastId = toast.loading('Uploading image...')
@@ -143,6 +145,23 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
             )}
           </div>
         </div>
+        <div className="md:flex mb-6">
+          <label className="label md:w-1/5" htmlFor="name">
+            inMainNav
+          </label>
+          <div className="md:w-4/5">
+            <input
+              type="checkbox"
+              id="inMainNav"
+              {...register('inMainNav')}
+              className="checkbox max-w-md"
+              defaultChecked={category.inMainNav}
+            />
+            {errors.inMainNav && (
+              <div className="text-error">{errors.inMainNav.message}</div>
+            )}
+          </div>
+        </div>
 
         <div className="md:flex mb-6">
           <label className="label md:w-1/5" htmlFor="image">
@@ -198,8 +217,7 @@ export default function CategoryEditForm({ categoryId }: { categoryId: string })
               className="input input-bordered w-full max-w-md"
             />
           </div>
-        </div>
-
+        </div>        
         <div className="md:flex mb-6">
           <label className="label md:w-1/5" htmlFor="description">
             Description

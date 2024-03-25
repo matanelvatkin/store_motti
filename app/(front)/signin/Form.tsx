@@ -4,6 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import Link from 'next/link'
+import Register from '../register/Form'
+import useLayoutService from '@/lib/hooks/useLayout'
 
 type Inputs = {
   email: string
@@ -13,6 +15,7 @@ type Inputs = {
 const Form = () => {
   const { data: session } = useSession()
 
+  const {openPopup,closePopup} = useLayoutService();
   const params = useSearchParams()
   let callbackUrl = params.get('callbackUrl') || '/'
   const router = useRouter()
@@ -30,6 +33,7 @@ const Form = () => {
 
   useEffect(() => {
     if (session && session.user) {
+      closePopup()
       router.push(callbackUrl)
     }
   }, [callbackUrl, params, router, session])
@@ -40,6 +44,7 @@ const Form = () => {
       email,
       password,
     })
+    
   }
   return (
     <div className="max-w-sm  mx-auto card bg-base-300 my-4">
@@ -107,9 +112,10 @@ const Form = () => {
         </form>
         <div>
           Need an account?{' '}
-          <Link className="link" href={`/register?callbackUrl=${callbackUrl}`}>
+          {/* <Link className="link" href={`/register?callbackUrl=${callbackUrl}`}>
             Register
-          </Link>
+          </Link> */}
+          <button onClick={()=>openPopup(<Register/>)}>Register</button>
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ export const PUT = auth(async (...args: any) => {
     )
   }
 
-  const { name, image, icon, iconSvg, description,slug,code } = await req.json()
+  const { name, image, icon, iconSvg, description,slug,code,inMainNav } = await req.json()
 
   try {
     await dbConnect()
@@ -50,6 +50,7 @@ export const PUT = auth(async (...args: any) => {
       category.description = description
       category.slug = slug
       category.code = code
+      category.inMainNav = inMainNav
 
       
 

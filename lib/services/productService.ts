@@ -1,7 +1,7 @@
 import { cache } from 'react'
 import dbConnect from '@/lib/dbConnect'
 import ProductModel, { Product } from '@/lib/models/ProductModel'
-import CategoryModel from '../models/CategoryModel'
+import CategoryModel, { Category } from '../models/CategoryModel'
 
 export const revalidate = 3600
 
@@ -118,11 +118,21 @@ const getCategories = cache(async () => {
   return categories
 })
 
+const getByCategory=cache(async (name:string) => {
+  await dbConnect()
+  const category:Category|null = await CategoryModel.findOne({ name})
+  if(!category) return [] as Product[]
+  const products = await ProductModel.find({category: category._id}).lean()
+  
+  return products as Product[]
+})
+
 const productService = {
   getLatest,
   getFeatured,
   getBySlug,
   getByQuery,
   getCategories,
+  getByCategory
 }
 export default productService
