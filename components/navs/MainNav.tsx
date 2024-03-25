@@ -29,11 +29,9 @@ export default function MainNav() {
           key={category._id}
             className="relative"
             onMouseEnter={() => handleMouseEnter(category.name)}
-            onClick={()=>router.push(`/category/${category.name }`)}
-
             onMouseLeave={handleMouseLeave}
           >
-            <span>{category.name}</span>
+            <span  onClick={()=>router.push(`/category/${category.name }`)}>{category.name}</span>
             {openDropdown === category.name && (
               <div
                 onMouseEnter={() => handleMouseEnter(category.name)}

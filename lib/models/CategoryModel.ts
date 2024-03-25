@@ -9,7 +9,7 @@ const categorySchema = new mongoose.Schema(
     slug: { type: String},
     code: { type: String},
     description: { type: String, required: true },
-    inMainNav:{type:Boolean, default: true}
+    inMainNav:{type:Boolean, default: false}
   },
   {
     timestamps: true,
