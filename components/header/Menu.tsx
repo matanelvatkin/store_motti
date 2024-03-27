@@ -40,7 +40,7 @@ const Menu = () => {
     <>
       <div>
         <ul className="flex items-stretch lighting">
-          <li>
+        {pages?.length>0&&<li>
             <div className="dropdown dropdown-bottom dropdown-end">
               <label tabIndex={0} className="btn btn-ghost rounded-btn">
               <BiFileFind />
@@ -49,7 +49,7 @@ const Menu = () => {
                 tabIndex={0}
                 className="menu dropdown-content z-[1] p-2 shadow bg-base-300 rounded-box w-52 "
               >
-                {pages?.length>0&&pages?.map((page:Page)=>{
+                {pages?.map((page:Page)=>{
                   return <li onClick={handleClick}>
                   <Link href={`/pages/${page.slug}`}>{page.title}</Link>
                 </li>
@@ -57,7 +57,7 @@ const Menu = () => {
                 }
               </ul>
             </div>
-          </li>
+          </li>}
           {session && session.user ? (
             <>
               <li>
