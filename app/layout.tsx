@@ -8,7 +8,6 @@ import Header from "@/components/header/Header";
 import InfoNav from "@/components/navs/InfoNav";
 import MainNav from "@/components/navs/MainNav";
 import Popup from "@/components/Popup";
-import useLayoutService from "@/lib/hooks/useLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,7 +44,8 @@ export default function RootLayout({
                 htmlFor="my-drawer"
                 aria-label="close sidebar"
                 className="drawer-overlay"
-              ></label>
+              >
+              </label>
               <Sidebar />
             </div>
           </div>
