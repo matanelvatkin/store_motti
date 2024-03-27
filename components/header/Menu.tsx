@@ -50,7 +50,7 @@ const Menu = () => {
                 className="menu dropdown-content z-[1] p-2 shadow bg-base-300 rounded-box w-52 "
               >
                 {pages?.map((page:Page)=>{
-                  return <li onClick={handleClick}>
+                  return <li key={page._id} onClick={handleClick}>
                   <Link href={`/pages/${page.slug}`}>{page.title}</Link>
                 </li>
                 })
