@@ -29,7 +29,7 @@ export default function PagesEditForm({ pageId }: { pageId: string }) {
 
       toast.success('Page updated successfully')
       router.push('/admin/pages')
-      mutate('/api/products/pages');
+      mutate('/api/pages');
     }
   )
 

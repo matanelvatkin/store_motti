@@ -2,6 +2,7 @@
 import useCartService from "@/lib/hooks/useCartStore";
 import AddToCart from "./products/AddToCart";
 import { Product } from "@/lib/models/ProductModel";
+import Link from "next/link";
 
 const Sidebar = () => {
   const cart = useCartService();
@@ -15,6 +16,9 @@ const Sidebar = () => {
           {item.price*item.qty}
           <AddToCart item={item}/>
         </li>)}
+        <Link href={'/cart'}>
+          cartPage
+        </Link>
       </ul>
     </>
   );

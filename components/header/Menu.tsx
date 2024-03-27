@@ -2,17 +2,18 @@
 import useCartService from "@/lib/hooks/useCartStore";
 import useLayoutService from "@/lib/hooks/useLayout";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Form from '../../app/(front)/signin/Form'
+import Form from "../../app/(front)/signin/Form";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BsCart } from "react-icons/bs";
-import { BiLogOut, BiUser } from "react-icons/bi";
+import { BiUser, BiFileFind } from "react-icons/bi";
 import { useSearchParams } from "next/navigation";
+import useSWR from "swr";
+import { Page } from "@/lib/models/PageModel";
 
 const Menu = () => {
   const { items, init } = useCartService();
   const [mounted, setMounted] = useState(false);
-  const params = useSearchParams()
+  const params = useSearchParams();
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -23,39 +24,58 @@ const Menu = () => {
   };
 
   const { data: session } = useSession();
-
-  const { theme, toggleTheme, openPopup,closePopup } = useLayoutService();
+  const { data: pages } = useSWR("/api/pages");
+  const { theme, toggleTheme, openPopup, closePopup } = useLayoutService();
 
   const handleClick = () => {
     (document.activeElement as HTMLElement).blur();
   };
-  useEffect(()=>{
-    if(params.get('error') === 'CredentialsSignin'){
-      openPopup(<Form/>)
-    }
-    else closePopup()
-  },[params])
+  useEffect(() => {
+    if (params.get("error") === "CredentialsSignin") {
+      openPopup(<Form />);
+    } else closePopup();
+  }, [params]);
 
   return (
     <>
       <div>
         <ul className="flex items-stretch lighting">
-          <li>
-            <Link className="btn btn-ghost rounded-btn" href="/cart">
-              <BsCart />
-              {mounted && items.length != 0 && (
-                <div className="badge badge-secondary">
-                  {items.reduce((a, c) => a + c.qty, 0)}{" "}
-                </div>
-              )}
-            </Link>
-          </li>
+        {pages?.length>0&&<li>
+            <div className="dropdown dropdown-bottom dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost rounded-btn">
+              <BiFileFind />
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content z-[1] p-2 shadow bg-base-300 rounded-box w-52 "
+              >
+                {pages?.map((page:Page)=>{
+                  return <li onClick={handleClick}>
+                  <Link href={`/pages/${page.slug}`}>{page.title}</Link>
+                </li>
+                })
+                }
+              </ul>
+            </div>
+          </li>}
           {session && session.user ? (
             <>
               <li>
                 <div className="dropdown dropdown-bottom dropdown-end">
                   <label tabIndex={0} className="btn btn-ghost rounded-btn">
-                    <BiLogOut />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      className="inline-block w-5 h-5 stroke-current"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                      ></path>
+                    </svg>
                   </label>
                   <ul
                     tabIndex={0}
@@ -86,7 +106,7 @@ const Menu = () => {
                 className="btn btn-ghost rounded-btn"
                 type="button"
                 onClick={() => {
-                  openPopup(<Form/> );
+                  openPopup(<Form />);
                 }}
               >
                 <BiUser />
