@@ -12,7 +12,7 @@ export const GET = auth(async (req: any) => {
     )
   }
   await dbConnect()
-  const pages = await PageModel.find({inNavPage:false})
+  const pages = await PageModel.find({inNavPage:true})
   return Response.json(pages)
 }) as any
 
@@ -31,6 +31,7 @@ export const POST = auth(async (req: any) => {
     image: '/images/page.jpg',
     description: 'sample description',
     slug:'sample slug',
+    inNavPage:true
   })
   try {
     await page.save()
