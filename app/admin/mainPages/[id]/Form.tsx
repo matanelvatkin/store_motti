@@ -30,7 +30,7 @@ export default function PagesEditForm({ pageId }: { pageId: string }) {
       if (!res.ok) return toast.error(data.message);
 
       toast.success("Page updated successfully");
-      router.push("/admin/pages");
+      router.push("/admin/mainPages");
       mutate("/api/pages");
     }
   );

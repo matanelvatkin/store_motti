@@ -1,13 +1,13 @@
 import AdminLayout from '@/components/admin/AdminLayout'
-import Messages from './Message'
+import Pages from './Pages'
 
 export const metadata = {
-  title: 'Admin Message',
+  title: 'Admin Pages',
 }
 const AdminCategoryPage = () => {
   return (
-    <AdminLayout activeItem="messages">
-      <Messages />
+    <AdminLayout activeItem="mainPages">
+      <Pages />
     </AdminLayout>
   )
 }

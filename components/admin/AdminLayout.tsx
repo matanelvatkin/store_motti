@@ -69,6 +69,12 @@ const AdminLayout = async ({
                 pages
               </Link>
               <Link
+                className={'mainPages' === activeItem ? 'active' : ''}
+                href="/admin/mainPages"
+              >
+                in nav pages
+              </Link>
+              <Link
                 className={'messages' === activeItem ? 'active' : ''}
                 href="/admin/messages"
               >

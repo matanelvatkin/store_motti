@@ -6,6 +6,7 @@ const pageSchema = new mongoose.Schema(
     image: { type: String},
     slug: { type: String},
     description: { type: String, required: true },
+    inNavPage: { type: Boolean, default: false}
   },
   {
     timestamps: true,
@@ -23,4 +24,5 @@ export type Page = {
   image?: string,
   description:  string,
   slug?:string,
+  inNavPage?:boolean
 }

@@ -10,33 +10,12 @@ import parse from 'html-react-parser';
 
 export default function Pages() {
   
-  const { data: pages, error } = useSWR(`/api/admin/pages`)
+  const { data: pages, error } = useSWR(`/api/admin/mainPages`)
 
   const router = useRouter()
 
-  const { trigger: deletePage } = useSWRMutation(
-    `/api/admin/pages`,
-    async (url, { arg }: { arg: { pageId: string } }) => {
-      const toastId = toast.loading('Deleting page...')
-      const res = await fetch(`${url}/${arg.pageId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await res.json()
-      res.ok
-        ? toast.success('Page deleted successfully', {
-            id: toastId,
-          })
-        : toast.error(data.message, {
-            id: toastId,
-          })
-    }
-  )
-
   const { trigger: createPage, isMutating: isCreating } = useSWRMutation(
-    `/api/admin/pages`,
+    `/api/admin/mainPages`,
     async (url) => {
       const res = await fetch(url, {
         method: 'POST',
@@ -93,14 +72,6 @@ export default function Pages() {
                   >
                     Edit
                   </Link>
-                  &nbsp;
-                  <button
-                    onClick={() => deletePage({ pageId: page._id! })}
-                    type="button"
-                    className="btn btn-ghost btn-sm"
-                  >
-                    Delete
-                  </button>
                 </td>
               </tr>
             ))}
