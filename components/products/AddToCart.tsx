@@ -5,7 +5,7 @@ import { OrderItem } from "@/lib/models/OrderModel";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function AddToCart({ item }: { item: OrderItem }) {
+export default function AddToCart({ item}: { item: OrderItem }) {
   const router = useRouter();
   const { items, increase, decrease } = useCartService();
   const { toggleDrawer,offDrawer } = useLayoutService();
@@ -30,7 +30,7 @@ export default function AddToCart({ item }: { item: OrderItem }) {
     increase(item);
   };
   return existItem ? (
-    <div>
+    <div >
       <button
         className="btn"
         type="button"

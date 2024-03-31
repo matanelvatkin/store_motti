@@ -3,12 +3,14 @@ import { Category } from "@/lib/models/CategoryModel";
 import { Product } from "@/lib/models/ProductModel";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 
 export default function MainNav() {
   const [openDropdown, setOpenDropdown] = useState("");
+  const [message,SetMessage] = useState({msg:'זמן הספקה תוך 24 שעות',index:-1})
+  const {data: messages}  = useSWR('/api/messages');
   const { data: catagories } = useSWR(`/api/products/categories`);
   const { data: products } = useSWR(`/api/products`);
   const router = useRouter()
@@ -19,7 +21,17 @@ export default function MainNav() {
   const handleMouseLeave = () => {
     setOpenDropdown("");
   };
-  
+  useEffect(()=>{
+    if(messages){
+      setInterval(()=>{
+        if(message.index===-1) 
+        SetMessage({msg:messages[0].message,index:0})
+      else if(message.index<messages.length){
+        SetMessage({msg:messages[message.index+1].message,index:message.index+1})
+      }
+      },3500)
+    }
+  },[messages])
   return (
     <nav  className="h-[90px]" >
       <ul className="categorymenu flex flex-row justify-between">
@@ -59,7 +71,7 @@ export default function MainNav() {
         </div>
         <div className="left">
         <li>
-          <p>זמן הספקה תוך 24 שעות</p>
+          <p>{message.msg}</p>
         </li>
         </div>
       </ul>

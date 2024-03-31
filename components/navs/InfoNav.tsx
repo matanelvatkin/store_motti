@@ -14,20 +14,20 @@ export default function InfoNav() {
           <Link href="/"><FaHome /> ראשי</Link>
         </li>
         <li>
-        <Link href="/"><IoAlbumsOutline /> אודות</Link>
+        <Link href="/about"><IoAlbumsOutline /> אודות</Link>
         </li>
         <li>
-          <Link href="/products"><BiEnvelope /> צרו קשר</Link>
+          <Link href="/contactAs"><BiEnvelope /> צרו קשר</Link>
         </li>
       </ul>
       <ul className="flex-row justify-between">
       </ul>
       <ul className="flex flex-row justify-between">
         <li>
-          <Link href="/about"><BiPhoneCall />08-553-4545</Link>
+          <Link href="/contactAs"><BiPhoneCall />08-553-4545</Link>
         </li>
         <li>
-          <Link href="/about"><FaShippingFast /> משלוחים ואזורי חלוקה</Link>
+          <Link href="/sentShipping"><FaShippingFast /> משלוחים ואזורי חלוקה</Link>
         </li>
       </ul>
     </nav>

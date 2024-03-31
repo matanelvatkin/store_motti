@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Form from "../../app/(front)/signin/Form";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BiUser, BiFileFind } from "react-icons/bi";
+import { BiUser } from "react-icons/bi";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import { Page } from "@/lib/models/PageModel";
@@ -43,7 +43,19 @@ const Menu = () => {
         {pages?.length>0&&<li>
             <div className="dropdown dropdown-bottom dropdown-end">
               <label tabIndex={0} className="btn btn-ghost rounded-btn">
-              <BiFileFind />
+              <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      className="inline-block w-5 h-5 stroke-current"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 6h16M4 12h16M4 18h16"
+                      ></path>
+                    </svg>
               </label>
               <ul
                 tabIndex={0}
@@ -63,19 +75,7 @@ const Menu = () => {
               <li>
                 <div className="dropdown dropdown-bottom dropdown-end">
                   <label tabIndex={0} className="btn btn-ghost rounded-btn">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      className="inline-block w-5 h-5 stroke-current"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4 6h16M4 12h16M4 18h16"
-                      ></path>
-                    </svg>
+                  <BiUser />
                   </label>
                   <ul
                     tabIndex={0}
