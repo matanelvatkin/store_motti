@@ -68,6 +68,12 @@ const AdminLayout = async ({
               >
                 pages
               </Link>
+              <Link
+                className={'messages' === activeItem ? 'active' : ''}
+                href="/admin/messages"
+              >
+                messages
+              </Link>
             </li>
           </ul>
         </div>
