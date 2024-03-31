@@ -24,12 +24,12 @@ export default function MainNav() {
   useEffect(()=>{
     if(messages){
       setInterval(()=>{
-        if(message.index===-1) 
-        SetMessage({msg:messages[0].message,index:0})
-      else if(message.index<messages.length){
-        SetMessage({msg:messages[message.index+1].message,index:message.index+1})
-      }
-      },3500)
+        SetMessage(prev=>{
+          if(prev.index<messages.length-1)
+          return {msg:messages[prev.index+1].message,index:prev.index+1}
+          return {msg:messages[0].message,index:0}
+        })
+      },5000)
     }
   },[messages])
   return (

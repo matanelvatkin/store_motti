@@ -1,5 +1,7 @@
 import pagesService from '@/lib/services/pagesService'
 import { Page } from '@/lib/models/PageModel'
+import parse from 'html-react-parser';
+
 
 export async function generateMetadata({
   params,
@@ -26,9 +28,9 @@ export default async function Pages({
   }
   return <div>
     <h3>{page.title}</h3>
-    <p>
-      {page.description}
-    </p>
+    <div>
+  {parse(page.description)}
+    </div>
     <img src={page.image} alt={page.title} />
   </div>
 }

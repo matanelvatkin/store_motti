@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
+import parse from 'html-react-parser';
 
 export default function Pages() {
   
@@ -83,7 +84,7 @@ export default function Pages() {
               <tr key={page._id}>
                 <td>{formatId(page._id!)}</td>
                 <td>{page.title}</td>
-                <td>{page.description.substring(0,20)}...</td>
+                <td>{parse(page.description.substring(0,20))}...</td>
                 <td>
                   <Link
                     href={`/admin/pages/${page._id}`}
